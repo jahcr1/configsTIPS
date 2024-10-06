@@ -1,0 +1,73 @@
+{
+  // Configuración del entorno de trabajo (Workbench)
+  "workbench.colorTheme": "One Dark Pro Mix",
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.startupEditor": "newUntitledFile",
+  "workbench.sideBar.location": "right",
+
+  // Configuración del editor
+  "editor.minimap.enabled": false,
+  "editor.formatOnSave": true,
+  "editor.tabSize": 2,
+  "editor.cursorBlinking": "expand",
+  "editor.cursorSmoothCaretAnimation": "on",
+  "editor.linkedEditing": true,
+  "editor.guides.bracketPairs": true,
+  "editor.matchBrackets": "never",
+
+  // Configuraciones de la terminal (incluyendo Git Bash)
+  "terminal.integrated.defaultProfile.windows": "Git Bash",
+  "terminal.integrated.profiles.windows": {
+    "Git Bash": {
+      "path": "C:\\Program Files\\Git\\bin\\bash.exe",
+      "args": ["--login", "-i"],
+      "icon": "terminal-bash"
+    },
+    "PowerShell": {
+      "path": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "icon": "terminal-powershell"
+    },
+    "Command Prompt": {
+      "path": "C:\\Windows\\System32\\cmd.exe",
+      "icon": "terminal-cmd"
+    }
+  },
+
+  // Configuraciones adicionales para la terminal
+  "terminal.integrated.cursorStyle": "line", // Estilo de cursor
+  "terminal.integrated.cursorWidth": 2, // Ancho del cursor
+  "terminal.integrated.cursorBlinking": true, // Cursor parpadeante
+  "terminal.integrated.fontSize": 14, // Tamaño de fuente de la terminal
+  "terminal.integrated.fontFamily": "Consolas, 'Courier New', monospace", // Fuente de la terminal
+  "terminal.integrated.scrollback": 10000, // Historial de línea en terminal
+  "terminal.integrated.env.windows": {
+    "PATH": "${env:PATH};C:\\Program Files\\Git\\bin;" // Asegurarte que el PATH de Git Bash esté accesible
+  },
+
+  // Configuración de archivos y autosave
+  "files.autoSave": "afterDelay",
+
+  // Configuración de Live Server
+  "liveServer.settings.donotShowInfoMsg": true,
+  "liveServer.settings.donotVerifyTags": true,
+
+  // Formateador predeterminado global (Prettier para la mayoría de los lenguajes)
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+
+  // Configuración específica para HTML
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  // Configuración específica para PHP
+  "php.validate.executablePath": "c:\\xampp\\php\\php.exe",
+  "[php]": {
+    "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
+  },
+
+  // Configuración específica para JavaScript
+  "javascript.preferences.useAliasesForRenames": false,
+
+  // Desactivar breadcrumbs
+  "breadcrumbs.enabled": false
+}
