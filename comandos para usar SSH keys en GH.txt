@@ -1,0 +1,89 @@
+Configurar y activar llaves SSH para Git y GitHub te permitirá autenticarte de forma segura sin necesidad de introducir tu usuario y contraseña cada vez que realices una operación como clonar, hacer push o pull desde GitHub. A continuación te explico cómo configurar las llaves SSH por primera vez y vincularlas con tu cuenta de GitHub, para que puedas acceder a tus proyectos desde diferentes computadoras.
+
+Pasos para configurar y activar las llaves SSH:
+1. Generar una llave SSH
+El primer paso es generar una nueva llave SSH en tu computadora. Estos son los comandos y pasos:
+
+Abre la terminal en tu sistema (puede ser Bash, Git Bash, terminal en Linux/macOS, o CMD/PowerShell en Windows).
+
+Ejecuta el siguiente comando para generar una nueva clave SSH (se recomienda usar el email de tu cuenta de GitHub):
+
+ssh-keygen -t ed25519 -C "tu-email@example.com"
+Si tu sistema no soporta ed25519, puedes usar rsa con este comando alternativo:
+
+ssh-keygen -t rsa -b 4096 -C "tu-email@example.com"
+Cuando te pregunte dónde guardar la llave, puedes presionar Enter para aceptar la ubicación predeterminada (/home/usuario/.ssh/id_ed25519 o /home/usuario/.ssh/id_rsa).
+
+Te pedirá una contraseña opcional para proteger tu clave SSH. Puedes presionar Enter si no quieres usar una, o escribir una contraseña para mayor seguridad.
+
+2. Agregar la llave SSH al agente SSH
+Para que la llave SSH funcione, es necesario agregarla al agente SSH que gestiona las claves en segundo plano. Haz lo siguiente:
+
+Asegúrate de que el agente SSH esté corriendo con el comando:
+
+eval "$(ssh-agent -s)"
+Esto iniciará el agente SSH si no está activo.
+
+Luego, añade tu llave SSH recién generada al agente con el comando:
+
+ssh-add ~/.ssh/id_ed25519
+O, si usaste rsa, reemplaza por:
+
+ssh-add ~/.ssh/id_rsa
+3. Copiar la llave SSH pública
+Ahora necesitas copiar la clave pública generada para agregarla a GitHub.
+
+Usa el siguiente comando para copiar la llave pública al portapapeles (asegúrate de estar en la ubicación correcta de tu clave pública):
+
+Para Linux/macOS:
+
+cat ~/.ssh/id_ed25519.pub
+Para Windows (Git Bash):
+
+clip < ~/.ssh/id_ed25519.pub
+Si usaste rsa, ajusta el comando:
+
+cat ~/.ssh/id_rsa.pub
+Copia el contenido completo que aparece en la terminal (empieza con ssh-ed25519 o ssh-rsa y termina con tu correo electrónico).
+
+4. Agregar la llave SSH en GitHub
+Ahora necesitas agregar la clave SSH copiada a tu cuenta de GitHub.
+
+Ve a GitHub e inicia sesión en tu cuenta.
+En la esquina superior derecha, haz clic en tu foto de perfil y selecciona Settings (Configuración).
+En el menú lateral izquierdo, ve a la sección SSH and GPG keys.
+Haz clic en el botón New SSH key.
+Pon un nombre a tu nueva llave SSH (por ejemplo, "Mi Laptop" o "Trabajo") y pega la clave pública que copiaste anteriormente en el campo de la llave.
+Haz clic en Add SSH key para guardar la llave.
+5. Probar la conexión con GitHub
+Para asegurarte de que todo esté configurado correctamente, puedes probar la conexión con GitHub usando SSH:
+
+En la terminal, ejecuta el siguiente comando para probar la conexión:
+
+ssh -T git@github.com
+Si es la primera vez que te conectas, te pedirá que confirmes si quieres conectarte a ese host. Escribe yes y presiona Enter.
+
+Si la configuración fue correcta, verás un mensaje como este:
+
+Hi username! You've successfully authenticated, but GitHub does not provide shell access.
+Esto significa que tu llave SSH está funcionando correctamente y puedes usarla para interactuar con tus repositorios de GitHub.
+
+6. Configurar Git para usar la llave SSH
+Por defecto, Git usará la conexión SSH si clonas un repositorio usando la URL SSH en lugar de la URL HTTPS. Cuando clones repositorios, asegúrate de usar la URL SSH para aprovechar la autenticación con llaves SSH.
+
+
+Por ejemplo, al clonar un repositorio, usa la URL SSH de esta forma:
+
+git clone git@github.com:usuario/nombre-repositorio.git
+Resumen de los pasos:
+Genera una nueva llave SSH con ssh-keygen.
+Agrega la llave al agente SSH con ssh-add.
+Copia la clave pública con cat y agrégala a GitHub.
+Prueba la conexión con GitHub usando ssh -T git@github.com.
+Usa las URLs SSH para interactuar con tus repositorios (ej. git clone git@github.com:usuario/repositorio.git).
+Acceder desde diferentes computadoras
+Para acceder a tus proyectos desde diferentes computadoras:
+
+Repite este mismo proceso en cada computadora donde quieras acceder a tus repositorios usando llaves SSH.
+Cada vez que generes una nueva llave SSH en una computadora diferente, deberás agregar esa nueva llave a GitHub siguiendo el mismo procedimiento (en Settings > SSH and GPG keys).
+Con este método, no tendrás que ingresar tu usuario y contraseña cada vez que interactúes con tus repositorios. ¡Listo! Ya puedes gestionar tus proyectos de manera más segura y eficiente desde diferentes computadoras.
